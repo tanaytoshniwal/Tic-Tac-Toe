@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.border.SoftBevelBorder;
@@ -27,59 +28,99 @@ public class Board extends JFrame implements MouseListener{
         p9.addMouseListener(this);
         setBackground(Color.BLACK);
         setLocationRelativeTo(this);
+        
         setResizable(false);
         setSize(350,373);
+        map.put(p1,0);
+        map.put(p2,1);
+        map.put(p3,2);
+        map.put(p4,3);
+        map.put(p5,4);
+        map.put(p6,5);
+        map.put(p7,6);
+        map.put(p8,7);
+        map.put(p9,8);
     }
     @Override
     public void mouseClicked(MouseEvent e){
-    	chance--;
-    	if(chance<0)
+    	chance -= 2;
+    	if(chance<1)
     		System.exit(0);
-    	if(chance%2==1){
-	    	JPanel panel=(JPanel)e.getSource();
-	    	if(panel==p1){
-	    		b[0]=false;
-	    	}
-	    	if(panel==p2){
-	    		b[1]=false;
-	    	}
-	    	if(panel==p3){
-	    		b[2]=false;
-	    	}
-	    	if(panel==p4){
-	    		b[3]=false;
-	    	}
-	    	if(panel==p5){
-	    		b[4]=false;
-	    	}
-	    	if(panel==p6){
-	    		b[5]=false;
-	    	}
-	    	if(panel==p7){
-	    		b[6]=false;
-	    	}
-	    	if(panel==p8){
-	    		b[7]=false;
-	    	}
-	    	if(panel==p9){
-	    		b[8]=false;
-	    	}
+    	JPanel p=(JPanel)e.getSource();
+    	if(map.containsValue(p)){
+    		map.remove(p);
     	}
-    	else{
-    		chance--;
-    		robot();
-    	}
+    	p.setOpaque(true);
+    	p.setBackground(Color.GRAY);
+    	p.removeMouseListener(this);
+    	map.remove(p);
+    	com();
+    	check();
     }
-    private void robot(){
-		double choice=Math.random()*9;
-		int c=(int)choice;
-		System.out.println(c);
-		if(b[c]==false){
-			robot();
-		}
-		else{
-			b[c]=false;
-		}
+    public void check(){
+    	
+    }
+    public void com(){
+    	int a = (int)(Math.random()*9);
+    	System.out.println(a);
+    	if(map.containsValue(a)){
+    		if(a==0){
+    			p1.setOpaque(true);
+    			p1.setBackground(Color.DARK_GRAY);
+    	    	p1.removeMouseListener(this);
+    			map.remove(p1);
+    		}
+    		else if(a==1){
+    			p2.setOpaque(true);
+    			p2.setBackground(Color.DARK_GRAY);
+    	    	p2.removeMouseListener(this);
+    			map.remove(p2);
+    		}
+    		else if(a==2){
+    			p3.setOpaque(true);
+    			p3.setBackground(Color.DARK_GRAY);
+    	    	p3.removeMouseListener(this);
+    			map.remove(p3);
+    		}
+    		else if(a==3){
+    			p4.setOpaque(true);
+    			p4.setBackground(Color.DARK_GRAY);
+    	    	p4.removeMouseListener(this);
+    			map.remove(p4);
+    		}
+    		else if(a==4){
+    			p5.setOpaque(true);
+    			p5.setBackground(Color.DARK_GRAY);
+    			map.remove(p5);
+    	    	p5.removeMouseListener(this);
+    		}
+    		else if(a==5){
+    			p6.setOpaque(true);
+    	    	p6.removeMouseListener(this);
+    			p6.setBackground(Color.DARK_GRAY);
+    			map.remove(p6);
+    		}
+    		else if(a==6){
+    			p7.setOpaque(true);
+    	    	p7.removeMouseListener(this);
+    			p7.setBackground(Color.DARK_GRAY);
+    			map.remove(p7);
+    		}
+    		else if(a==7){
+    			p8.setOpaque(true);
+    			p8.setBackground(Color.DARK_GRAY);
+    	    	p8.removeMouseListener(this);
+    			map.remove(p8);
+    		}
+    		else if(a==8){
+    			p9.setOpaque(true);
+    	    	p9.removeMouseListener(this);
+    			p9.setBackground(Color.DARK_GRAY);
+    			map.remove(p9);
+    		}
+    	}
+    	else
+    		com();
     }
     @Override
     public void mouseEntered(MouseEvent e){}
@@ -105,9 +146,6 @@ public class Board extends JFrame implements MouseListener{
         p7 = new JPanel();
         p8 = new JPanel();
         p9 = new JPanel();
-        b=new boolean[9];
-        for(int i=0;i<9;i++)
-        	b[i]=true;
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         p1.setBorder(new SoftBevelBorder(BevelBorder.RAISED));
         p1.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -283,6 +321,6 @@ public class Board extends JFrame implements MouseListener{
         JOptionPane.showMessageDialog(b,"It's Your Turn First!","Welcome!",JOptionPane.INFORMATION_MESSAGE);
     }
     private JPanel p1,p2,p3,p4,p5,p6,p7,p8,p9;
-	private boolean b[];
+    HashMap<JPanel,Integer> map=new HashMap<>();
 	private int chance=9;
 }
