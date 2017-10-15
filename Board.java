@@ -53,12 +53,44 @@ public class Board extends JFrame implements MouseListener{
     	p.setOpaque(true);
     	p.setBackground(Color.GRAY);
     	p.removeMouseListener(this);
+    	board[map.get(p)]++;
     	map.remove(p);
     	com();
     	check();
     }
     public void check(){
-    	
+    	if(board[0]==1&&board[4]==1&&board[8]==1){
+    		JOptionPane.showMessageDialog(this,"You Won!");
+    		System.exit(0);
+    	}
+    	if(board[2]==1&&board[4]==1&&board[6]==1){
+    		JOptionPane.showMessageDialog(this,"You Won!");
+    		System.exit(0);
+    	}
+    	if(board[0]==1&&board[1]==1&&board[2]==1){
+    		JOptionPane.showMessageDialog(this,"You Won!");
+    		System.exit(0);
+    	}
+    	if(board[3]==1&&board[4]==1&&board[5]==1){
+    		JOptionPane.showMessageDialog(this,"You Won!");
+    		System.exit(0);
+    	}
+    	if(board[6]==1&&board[7]==1&&board[8]==1){
+    		JOptionPane.showMessageDialog(this,"You Won!");
+    		System.exit(0);
+    	}
+    	if(board[0]==1&&board[3]==1&&board[6]==1){
+    		JOptionPane.showMessageDialog(this,"You Won!");
+    		System.exit(0);
+    	}
+    	if(board[1]==1&&board[4]==1&&board[7]==1){
+    		JOptionPane.showMessageDialog(this,"You Won!");
+    		System.exit(0);
+    	}
+    	if(board[2]==1&&board[5]==1&&board[8]==1){
+    		JOptionPane.showMessageDialog(this,"You Won!");
+    		System.exit(0);
+    	}
     }
     public void com(){
     	int a = (int)(Math.random()*9);
@@ -323,4 +355,7 @@ public class Board extends JFrame implements MouseListener{
     private JPanel p1,p2,p3,p4,p5,p6,p7,p8,p9;
     HashMap<JPanel,Integer> map=new HashMap<>();
 	private int chance=9;
+	int[] board={0,0,0,
+				 0,0,0,
+				 0,0,0};
 }
