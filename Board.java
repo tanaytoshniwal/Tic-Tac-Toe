@@ -56,40 +56,48 @@ public class Board extends JFrame implements MouseListener{
     	board[map.get(p)]++;
     	map.remove(p);
     	com();
-    	check();
+    	boolean b=true;
+    	if(p.getBackground()!=Color.GRAY)
+    		b=false;
+    	check(b);
     }
-    public void check(){
-    	if(board[0]==1&&board[4]==1&&board[8]==1){
-    		JOptionPane.showMessageDialog(this,"You Won!");
-    		System.exit(0);
+    public void check(boolean b){
+    	if(b){
+	    	if(board[0]==1&&board[4]==1&&board[8]==1){
+	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		System.exit(0);
+	    	}
+	    	if(board[2]==1&&board[4]==1&&board[6]==1){
+	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		System.exit(0);
+	    	}
+	    	if(board[0]==1&&board[1]==1&&board[2]==1){
+	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		System.exit(0);
+	    	}
+	    	if(board[3]==1&&board[4]==1&&board[5]==1){
+	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		System.exit(0);
+	    	}
+	    	if(board[6]==1&&board[7]==1&&board[8]==1){
+	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		System.exit(0);
+	    	}
+	    	if(board[0]==1&&board[3]==1&&board[6]==1){
+	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		System.exit(0);
+	    	}
+	    	if(board[1]==1&&board[4]==1&&board[7]==1){
+	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		System.exit(0);
+	    	}
+	    	if(board[2]==1&&board[5]==1&&board[8]==1){
+	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		System.exit(0);
+	    	}
     	}
-    	if(board[2]==1&&board[4]==1&&board[6]==1){
-    		JOptionPane.showMessageDialog(this,"You Won!");
-    		System.exit(0);
-    	}
-    	if(board[0]==1&&board[1]==1&&board[2]==1){
-    		JOptionPane.showMessageDialog(this,"You Won!");
-    		System.exit(0);
-    	}
-    	if(board[3]==1&&board[4]==1&&board[5]==1){
-    		JOptionPane.showMessageDialog(this,"You Won!");
-    		System.exit(0);
-    	}
-    	if(board[6]==1&&board[7]==1&&board[8]==1){
-    		JOptionPane.showMessageDialog(this,"You Won!");
-    		System.exit(0);
-    	}
-    	if(board[0]==1&&board[3]==1&&board[6]==1){
-    		JOptionPane.showMessageDialog(this,"You Won!");
-    		System.exit(0);
-    	}
-    	if(board[1]==1&&board[4]==1&&board[7]==1){
-    		JOptionPane.showMessageDialog(this,"You Won!");
-    		System.exit(0);
-    	}
-    	if(board[2]==1&&board[5]==1&&board[8]==1){
-    		JOptionPane.showMessageDialog(this,"You Won!");
-    		System.exit(0);
+    	else{
+    		
     	}
     }
     public void com(){
