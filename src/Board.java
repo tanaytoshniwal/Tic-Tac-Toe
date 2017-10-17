@@ -46,6 +46,7 @@ public class Board extends JFrame implements MouseListener{
     	check("chance");
     	player((JPanel)e.getSource());
     	check("player");
+    	System.out.println(chance);
     	com();
     	check("computer");
     }
@@ -79,19 +80,21 @@ public class Board extends JFrame implements MouseListener{
     }
     public void check(String msg){
     	if(msg.equalsIgnoreCase("chance")){
-    		if(chance==0)
+    		if(chance==-1)
     			System.exit(0);
     	}
     	else if(msg.equalsIgnoreCase("player")){
     		int b=get(1);
     		if(b==1){
     			JOptionPane.showMessageDialog(this, "You Win!!!","Congratulations!!!",JOptionPane.OK_OPTION);
+    			System.exit(0);
     		}
     	}
     	else if(msg.equalsIgnoreCase("computer")){
     		int b=get(2);
     		if(b==2){
     			JOptionPane.showMessageDialog(this, "You Lose!!!","Oops!!!",JOptionPane.OK_OPTION);
+    			System.exit(0);
     		}
     	}
     }
@@ -114,8 +117,14 @@ public class Board extends JFrame implements MouseListener{
     		map.remove(pan);
     		chance--;
     	}
-    	else
-    		com();
+    	else{
+    		if(chance!=0)
+    			com();
+    		else{
+    			JOptionPane.showMessageDialog(this, "It's a tie!!!","Oops!!!",JOptionPane.OK_OPTION);
+    			System.exit(0);
+    		}
+    	}
     }
     public JPanel getPan(int key){
     	JPanel pan=null;
