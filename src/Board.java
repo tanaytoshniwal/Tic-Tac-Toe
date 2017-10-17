@@ -44,92 +44,98 @@ public class Board extends JFrame implements MouseListener{
     @Override
     public void mouseClicked(MouseEvent e){
     	chance -= 2;
-    	if(chance<1)
-    		System.exit(0);
     	JPanel p=(JPanel)e.getSource();
-    	if(map.containsValue(p)){
-    		map.remove(p);
-    	}
     	p.setOpaque(true);
     	p.setBackground(Color.GRAY);
     	p.removeMouseListener(this);
+    	if(chance<0){
+    		if(check(true)==false)
+    			JOptionPane.showMessageDialog(this, "It's a tie!","Uhhh!",JOptionPane.INFORMATION_MESSAGE);
+    		System.exit(0);
+    	}
+    	if(map.containsValue(p)){
+    		map.remove(p);
+    	}
     	board[map.get(p)]++;
     	map.remove(p);
-    	com();
     	boolean b=true;
     	if(p.getBackground()!=Color.GRAY)
     		b=false;
     	check(b);
+    	com();
+    	System.out.println(b);
     }
-    public void check(boolean b){
+    public boolean check(boolean b){
+    	boolean ret=false;
     	if(b){
 	    	if(board[0]==1&&board[4]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[2]==1&&board[4]==1&&board[6]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[0]==1&&board[1]==1&&board[2]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[3]==1&&board[4]==1&&board[5]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[6]==1&&board[7]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[0]==1&&board[3]==1&&board[6]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[1]==1&&board[4]==1&&board[7]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[2]==1&&board[5]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!");
+	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
     	}
     	else{
     		if(board[0]==1&&board[4]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!");
+	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[2]==1&&board[4]==1&&board[6]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!");
+	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[0]==1&&board[1]==1&&board[2]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!");
+	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[3]==1&&board[4]==1&&board[5]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!");
+	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[6]==1&&board[7]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!");
+	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[0]==1&&board[3]==1&&board[6]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!");
+	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[1]==1&&board[4]==1&&board[7]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!");
+	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
 	    	if(board[2]==1&&board[5]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!");
+	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
 	    		System.exit(0);
 	    	}
     	}
+    	return ret;
     }
     public void com(){
     	int a = (int)(Math.random()*9);
