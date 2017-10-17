@@ -43,159 +43,121 @@ public class Board extends JFrame implements MouseListener{
     }
     @Override
     public void mouseClicked(MouseEvent e){
-    	chance -= 2;
-    	JPanel p=(JPanel)e.getSource();
-    	p.setOpaque(true);
-    	p.setBackground(Color.GRAY);
-    	p.removeMouseListener(this);
-    	if(chance<0){
-    		JOptionPane.showMessageDialog(this, "It's a tie!","Uhhh!",JOptionPane.INFORMATION_MESSAGE);
-    	}/*
-    	if(map.containsValue(p)){
-    		map.remove(p);
-    	}*/
-    	board[map.get(p)]++;
-    	map.remove(p);
-    	/*boolean b=true;
-    	if(p.getBackground()!= Color.GRAY)
-    		b=false;*/
-    	check(true);
+    	check("chance");
+    	player((JPanel)e.getSource());
+    	check("player");
     	com();
-    	check(false);
+    	check("computer");
     }
-    public boolean check(boolean b){
-    	boolean ret=false;
-    	if(b){
-	    	if(board[0]==1&&board[4]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[2]==1&&board[4]==1&&board[6]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[0]==1&&board[1]==1&&board[2]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[3]==1&&board[4]==1&&board[5]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[6]==1&&board[7]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[0]==1&&board[3]==1&&board[6]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[1]==1&&board[4]==1&&board[7]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[2]==1&&board[5]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"You Won!","Congratulations",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
+    public int get(int nigga){
+    	int b=0;
+    	if(board[0]==nigga&&board[1]==nigga&&board[2]==nigga){
+			b=nigga;
+		}
+    	else if(board[3]==nigga&&board[4]==nigga&&board[5]==nigga){
+    		b=nigga;
+		}
+    	else if(board[6]==nigga&&board[7]==nigga&&board[8]==nigga){
+    		b=nigga;
+		}
+    	else if(board[0]==nigga&&board[3]==nigga&&board[6]==nigga){
+    		b=nigga;
+		}
+    	else if(board[1]==nigga&&board[4]==nigga&&board[7]==nigga){
+    		b=nigga;
+		}
+    	else if(board[2]==nigga&&board[5]==nigga&&board[8]==nigga){
+    		b=nigga;
+		}
+    	else if(board[0]==nigga&&board[4]==nigga&&board[8]==nigga){
+    		b=nigga;
+		}
+    	else if(board[2]==nigga&&board[4]==nigga&&board[6]==nigga){
+    		b=nigga;
+		}
+    	return b;
+    }
+    public void check(String msg){
+    	if(msg.equalsIgnoreCase("chance")){
+    		if(chance==0)
+    			System.exit(0);
     	}
-    	else{
-    		if(board[0]==1&&board[4]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[2]==1&&board[4]==1&&board[6]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[0]==1&&board[1]==1&&board[2]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[3]==1&&board[4]==1&&board[5]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[6]==1&&board[7]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[0]==1&&board[3]==1&&board[6]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[1]==1&&board[4]==1&&board[7]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
-	    	if(board[2]==1&&board[5]==1&&board[8]==1){
-	    		JOptionPane.showMessageDialog(this,"CPU Won!","Oops",JOptionPane.OK_OPTION);
-	    		ret=true;
-	    	}
+    	else if(msg.equalsIgnoreCase("player")){
+    		int b=get(1);
+    		if(b==1){
+    			JOptionPane.showMessageDialog(this, "You Win!!!","Congratulations!!!",JOptionPane.OK_OPTION);
+    		}
     	}
-    	return ret;
+    	else if(msg.equalsIgnoreCase("computer")){
+    		int b=get(2);
+    		if(b==2){
+    			JOptionPane.showMessageDialog(this, "You Lose!!!","Oops!!!",JOptionPane.OK_OPTION);
+    		}
+    	}
+    }
+    public void player(JPanel pan){
+    	pan.setOpaque(true);
+    	pan.setBackground(Color.GRAY);
+    	pan.removeMouseListener(this);
+    	board[map.get(pan)]++;
+    	map.remove(pan);
+    	chance--;
     }
     public void com(){
-    	int a = (int)(Math.random()*9);
-    	System.out.println(a);
-    	if(map.containsValue(a)){
-    		if(a==0){
-    			p1.setOpaque(true);
-    			p1.setBackground(Color.DARK_GRAY);
-    	    	p1.removeMouseListener(this);
-    			map.remove(p1);
-    		}
-    		else if(a==1){
-    			p2.setOpaque(true);
-    			p2.setBackground(Color.DARK_GRAY);
-    	    	p2.removeMouseListener(this);
-    			map.remove(p2);
-    		}
-    		else if(a==2){
-    			p3.setOpaque(true);
-    			p3.setBackground(Color.DARK_GRAY);
-    	    	p3.removeMouseListener(this);
-    			map.remove(p3);
-    		}
-    		else if(a==3){
-    			p4.setOpaque(true);
-    			p4.setBackground(Color.DARK_GRAY);
-    	    	p4.removeMouseListener(this);
-    			map.remove(p4);
-    		}
-    		else if(a==4){
-    			p5.setOpaque(true);
-    			p5.setBackground(Color.DARK_GRAY);
-    			map.remove(p5);
-    	    	p5.removeMouseListener(this);
-    		}
-    		else if(a==5){
-    			p6.setOpaque(true);
-    	    	p6.removeMouseListener(this);
-    			p6.setBackground(Color.DARK_GRAY);
-    			map.remove(p6);
-    		}
-    		else if(a==6){
-    			p7.setOpaque(true);
-    	    	p7.removeMouseListener(this);
-    			p7.setBackground(Color.DARK_GRAY);
-    			map.remove(p7);
-    		}
-    		else if(a==7){
-    			p8.setOpaque(true);
-    			p8.setBackground(Color.DARK_GRAY);
-    	    	p8.removeMouseListener(this);
-    			map.remove(p8);
-    		}
-    		else if(a==8){
-    			p9.setOpaque(true);
-    	    	p9.removeMouseListener(this);
-    			p9.setBackground(Color.DARK_GRAY);
-    			map.remove(p9);
-    		}
+    	int rand = (int)(Math.random()*9);
+    	if(map.containsValue(rand)){
+    		JPanel pan=getPan(rand);
+    		pan.setOpaque(true);
+    		pan.setBackground(Color.DARK_GRAY);
+    		pan.removeMouseListener(this);
+    		board[map.get(pan)]+=2;
+    		map.remove(pan);
+    		chance--;
     	}
     	else
     		com();
+    }
+    public JPanel getPan(int key){
+    	JPanel pan=null;
+    	switch(key){
+	    	case 0:{
+	    		pan=p1;
+	    		break;
+	    	}
+	    	case 1:{
+	    		pan=p2;
+	    		break;
+	    	}
+	    	case 2:{
+	    		pan=p3;
+	    		break;
+	    	}
+	    	case 3:{
+	    		pan=p4;
+	    		break;
+	    	}
+	    	case 4:{
+	    		pan=p5;
+	    		break;
+	    	}
+	    	case 5:{
+	    		pan=p6;
+	    		break;
+	    	}
+	    	case 6:{
+	    		pan=p7;
+	    		break;
+	    	}
+	    	case 7:{
+	    		pan=p8;
+	    		break;
+	    	}
+	    	case 8:{
+	    		pan=p9;
+	    		break;
+	    	}
+    	}
+    	return pan;
     }
     @Override
     public void mouseEntered(MouseEvent e){}
