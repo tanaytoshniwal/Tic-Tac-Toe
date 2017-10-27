@@ -15,6 +15,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 public class Board extends JFrame implements MouseListener{
+	static int switcher=1;
     public Board() {
         initComponents();
         p1.addMouseListener(this);
@@ -43,12 +44,29 @@ public class Board extends JFrame implements MouseListener{
     }
     @Override
     public void mouseClicked(MouseEvent e){
-    	check("chance");
-    	player((JPanel)e.getSource());
-    	check("player");
-    	System.out.println(chance);
-    	com();
-    	check("computer");
+	    if(switcher==0){
+	    	check("chance");
+	    	player((JPanel)e.getSource());
+	    	check("player");
+	    	System.out.println(chance);
+	    	com();
+	    	check("computer");
+	    }
+	    else{
+	    	check("chance");
+	    	twoPlayers((JPanel)e.getSource());
+	    	check("player1");
+	    	check("player2");
+	    }
+    }
+    public void twoPlayers(JPanel pan){
+    	//System.out.println(chance);
+    	pan.setOpaque(true);
+    	pan.removeMouseListener(this);
+	    if(chance%2==0){	
+	    	pan.setBackground(Color.GRAY);
+	    	board[map.get(pan)]++;
+	    }
     }
     public int get(int nigga){
     	int b=0;
@@ -364,6 +382,7 @@ public class Board extends JFrame implements MouseListener{
         Board b;
         b=new Board();
         b.setVisible(true);
+        //int result=JOptionPane.showOptionDialog(b, "Select your choice", "Welcome to TIC-Tac-TOE", DO_NOTHING_ON_CLOSE, JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, getFrames(), getFrames());
         JOptionPane.showMessageDialog(b,"It's Your Turn First!","Welcome!",JOptionPane.INFORMATION_MESSAGE);
     }
     private JPanel p1,p2,p3,p4,p5,p6,p7,p8,p9;
