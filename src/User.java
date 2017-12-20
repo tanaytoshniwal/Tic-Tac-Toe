@@ -1,6 +1,6 @@
 
 public class User {
-	static boolean type=true;
+	static boolean type=false;
 	static int p1=0,p2=0;
 	static int getP1(){
 		return p1;
