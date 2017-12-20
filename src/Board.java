@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 public class Board extends JFrame implements ActionListener{
 	JButton b0,b1,b2,b3,b4,b5,b6,b7,b8;
 	String result="";
-	static int chance = 9;
+	int chance = 9;
 	int[][] bMatrix={{0,0,0},{0,0,0},{0,0,0}};
 	ImageIcon cross=new ImageIcon("c.png");
 	ImageIcon zero=new ImageIcon("o.png");
@@ -63,7 +63,15 @@ public class Board extends JFrame implements ActionListener{
 			User.p2++;
 		}
 		JOptionPane.showMessageDialog(this, result, "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
+		int m=JOptionPane.showConfirmDialog(this, "Up for Another Game?", "Hey!", JOptionPane.INFORMATION_MESSAGE, JOptionPane.YES_NO_OPTION);
+		//System.out.println(m);
 		dispose();
+		if(m==0){
+			new Board("Tic-Tac-Toe").setVisible(true);
+		}
+		else{
+			new ScoreBoard("Score Board").setVisible(true);
+		}
 	}
 	int check(){
 		int res=0;
