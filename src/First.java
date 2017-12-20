@@ -1,13 +1,15 @@
-import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class First extends JFrame{
+public class First extends JFrame implements ActionListener{
 	JLabel label;
 	JButton btn1,btn2;
 	JTextField name; 
@@ -39,6 +41,31 @@ public class First extends JFrame{
 		add(pan1);
 		add(pan2);
 		add(pan3);
+		
+		btn1.addActionListener(this);
+		btn2.addActionListener(this);
+	}
+	boolean check(){
+		if(name.getText().toString().equals("")){
+			return false;
+		}
+		return true;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e){
+		JButton b=(JButton)e.getSource();
+		if(check()&&b==btn1){
+			User.type=true;
+			dispose();
+			new Board("Tic-Tac-Toe").setVisible(true);
+		}
+		else if(check()&&b==btn2){
+			User.type=false;
+			dispose();
+			new Board("Tic-Tac-Toe").setVisible(true);
+		}
+		else
+			JOptionPane.showMessageDialog(this, "Name can't be empty!", "ERROR", JOptionPane.ERROR_MESSAGE);
 	}
 	public static void main(String[] args){
 		new First("Tic-Tac-Toe").setVisible(true);
