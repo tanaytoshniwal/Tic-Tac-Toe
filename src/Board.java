@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 public class Board extends JFrame implements ActionListener{
 	JButton b0,b1,b2,b3,b4,b5,b6,b7,b8;
+	String result="";
 	static int chance = 9;
 	int[][] bMatrix={{0,0,0},{0,0,0},{0,0,0}};
 	ImageIcon cross=new ImageIcon("c.png");
@@ -48,6 +49,75 @@ public class Board extends JFrame implements ActionListener{
 		b7.addActionListener(this);
 		b8.addActionListener(this);
 	}
+	void tie(){
+		JOptionPane.showMessageDialog(this, "It's a tie!", "OOPS!", JOptionPane.INFORMATION_MESSAGE);
+		dispose();
+	}
+	void pass(boolean b){
+		if(b){
+			result="Player 1 Wins!";
+			User.p1++;
+		}
+		else{
+			result="Player 2 Wins!";
+			User.p2++;
+		}
+		JOptionPane.showMessageDialog(this, result, "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
+		dispose();
+	}
+	int check(){
+		int res=0;
+		if(bMatrix[0][0]==1&&bMatrix[0][1]==1&&bMatrix[0][2]==1){
+			pass(true);res++;
+		}
+		if(bMatrix[1][0]==1&&bMatrix[1][1]==1&&bMatrix[1][2]==1){
+			pass(true);res++;
+		}
+		if(bMatrix[2][0]==1&&bMatrix[2][1]==1&&bMatrix[2][2]==1){
+			pass(true);res++;
+		}
+		if(bMatrix[0][0]==1&&bMatrix[1][0]==1&&bMatrix[2][0]==1){
+			pass(true);res++;
+		}
+		if(bMatrix[0][1]==1&&bMatrix[1][1]==1&&bMatrix[2][1]==1){
+			pass(true);res++;
+		}
+		if(bMatrix[0][2]==1&&bMatrix[1][2]==1&&bMatrix[2][2]==1){
+			pass(true);res++;
+		}
+		if(bMatrix[0][0]==1&&bMatrix[1][1]==1&&bMatrix[2][2]==1){
+			pass(true);res++;
+		}
+		if(bMatrix[0][2]==1&&bMatrix[1][1]==1&&bMatrix[2][0]==1){
+			pass(true);res++;
+		}
+
+		if(bMatrix[0][0]==-1&&bMatrix[0][1]==-1&&bMatrix[0][2]==-1){
+			pass(false);res++;
+		}
+		if(bMatrix[1][0]==-1&&bMatrix[1][1]==-1&&bMatrix[1][2]==-1){
+			pass(false);res++;
+		}
+		if(bMatrix[2][0]==-1&&bMatrix[2][1]==-1&&bMatrix[2][2]==-1){
+			pass(false);res++;
+		}
+		if(bMatrix[0][0]==-1&&bMatrix[1][0]==-1&&bMatrix[2][0]==-1){
+			pass(false);res++;
+		}
+		if(bMatrix[0][1]==-1&&bMatrix[1][1]==-1&&bMatrix[2][1]==-1){
+			pass(false);res++;
+		}
+		if(bMatrix[0][2]==-1&&bMatrix[1][2]==-1&&bMatrix[2][2]==-1){
+			pass(false);res++;
+		}
+		if(bMatrix[0][0]==-1&&bMatrix[1][1]==-1&&bMatrix[2][2]==-1){
+			pass(false);res++;
+		}
+		if(bMatrix[0][2]==-1&&bMatrix[1][1]==-1&&bMatrix[2][0]==-1){
+			pass(false);res++;
+		}
+		return res;
+	}
 	void result(){
 		/*for(int i=0;i<3;i++){
 			for(int j=0;j<3;j++){
@@ -55,77 +125,83 @@ public class Board extends JFrame implements ActionListener{
 			}
 			System.out.println();
 		}*/
+		int a=check();
+		if(a==0 && chance==0){
+			tie();
+		}
 	}
 	@Override
 	public void actionPerformed(ActionEvent e){
-		JButton btn=(JButton)e.getSource();
-		boolean b=false;
-		if(chance%2==1)
-			b=true;
-		if(b){
-			if(btn==b0){
-				bMatrix[0][0]=1;
+		if(!User.type){
+			JButton btn=(JButton)e.getSource();
+			boolean b=false;
+			if(chance%2==1)
+				b=true;
+			if(b){
+				if(btn==b0){
+					bMatrix[0][0]=1;
+				}
+				if(btn==b1){
+					bMatrix[0][1]=1;
+				}
+				if(btn==b2){
+					bMatrix[0][2]=1;
+				}
+				if(btn==b3){
+					bMatrix[1][0]=1;
+				}
+				if(btn==b4){
+					bMatrix[1][1]=1;
+				}
+				if(btn==b5){
+					bMatrix[1][2]=1;
+				}
+				if(btn==b6){
+					bMatrix[2][0]=1;
+				}
+				if(btn==b7){
+					bMatrix[2][1]=1;
+				}
+				if(btn==b8){
+					bMatrix[2][2]=1;
+				}
+				btn.setIcon(cross);
+				btn.setEnabled(false);
 			}
-			if(btn==b1){
-				bMatrix[0][1]=1;
+			else{
+				if(btn==b0){
+					bMatrix[0][0]=-1;
+				}
+				if(btn==b1){
+					bMatrix[0][1]=-1;
+				}
+				if(btn==b2){
+					bMatrix[0][2]=-1;
+				}
+				if(btn==b3){
+					bMatrix[1][0]=-1;
+				}
+				if(btn==b4){
+					bMatrix[1][1]=-1;
+				}
+				if(btn==b5){
+					bMatrix[1][2]=-1;
+				}
+				if(btn==b6){
+					bMatrix[2][0]=-1;
+				}
+				if(btn==b7){
+					bMatrix[2][1]=-1;
+				}
+				if(btn==b8){
+					bMatrix[2][2]=-1;
+				}
+				btn.setIcon(zero);
+				btn.setEnabled(false);
 			}
-			if(btn==b2){
-				bMatrix[0][2]=1;
-			}
-			if(btn==b3){
-				bMatrix[1][0]=1;
-			}
-			if(btn==b4){
-				bMatrix[1][1]=1;
-			}
-			if(btn==b5){
-				bMatrix[1][2]=1;
-			}
-			if(btn==b6){
-				bMatrix[2][0]=1;
-			}
-			if(btn==b7){
-				bMatrix[2][1]=1;
-			}
-			if(btn==b8){
-				bMatrix[2][2]=1;
-			}
-			btn.setIcon(cross);
-			btn.setEnabled(false);
+			chance--;
+			result();
 		}
-		else{
-			if(btn==b0){
-				bMatrix[0][0]=-1;
-			}
-			if(btn==b1){
-				bMatrix[0][1]=-1;
-			}
-			if(btn==b2){
-				bMatrix[0][2]=-1;
-			}
-			if(btn==b3){
-				bMatrix[1][0]=-1;
-			}
-			if(btn==b4){
-				bMatrix[1][1]=-1;
-			}
-			if(btn==b5){
-				bMatrix[1][2]=-1;
-			}
-			if(btn==b6){
-				bMatrix[2][0]=-1;
-			}
-			if(btn==b7){
-				bMatrix[2][1]=-1;
-			}
-			if(btn==b8){
-				bMatrix[2][2]=-1;
-			}
-			btn.setIcon(zero);
-			btn.setEnabled(false);
-		}
-		chance--;
-		result();
 	}
 	public static void main(String[] args){
 		new Board("").setVisible(true);
