@@ -1,8 +1,10 @@
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -10,6 +12,8 @@ public class Board extends JFrame implements ActionListener{
 	JButton b0,b1,b2,b3,b4,b5,b6,b7,b8;
 	static int chance = 9;
 	int[][] bMatrix={{0,0,0},{0,0,0},{0,0,0}};
+	ImageIcon cross=new ImageIcon("c.png");
+	ImageIcon zero=new ImageIcon("o.png");
 	public Board(String str){
 		FrameProperty.set(this, str, 500, 500, false, new GridLayout(3,3), EXIT_ON_CLOSE);
 		setLocationRelativeTo(this);
@@ -27,6 +31,13 @@ public class Board extends JFrame implements ActionListener{
 		add(b3);add(b4);add(b5);
 		add(b6);add(b7);add(b8);
 		
+		Image image1=cross.getImage();
+		image1=image1.getScaledInstance(156, 156, Image.SCALE_SMOOTH);
+		cross=new ImageIcon(image1);
+		image1=zero.getImage();
+		image1=image1.getScaledInstance(156, 156, Image.SCALE_SMOOTH);
+		zero=new ImageIcon(image1);
+		
 		b0.addActionListener(this);
 		b1.addActionListener(this);
 		b2.addActionListener(this);
@@ -37,235 +48,84 @@ public class Board extends JFrame implements ActionListener{
 		b7.addActionListener(this);
 		b8.addActionListener(this);
 	}
-	void check(int i){
-		if(i==1){
-			if(bMatrix[0][0]!=0&&bMatrix[0][1]!=0&&bMatrix[0][2]!=0){
-				System.out.println("p1 win");
-				JOptionPane.showMessageDialog(this, "Player 1 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
+	void result(){
+		/*for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				System.out.print(bMatrix[i][j] + " ");
 			}
-			if(bMatrix[1][0]!=0&&bMatrix[1][1]!=0&&bMatrix[1][2]!=0){
-				System.out.println("p1 win");
-				JOptionPane.showMessageDialog(this, "Player 1 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[2][0]!=0&&bMatrix[2][1]!=0&&bMatrix[2][2]!=0){
-				System.out.println("p1 win");
-				JOptionPane.showMessageDialog(this, "Player 1 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[0][0]!=0&&bMatrix[1][0]!=0&&bMatrix[2][0]!=0){
-				System.out.println("p1 win");
-				JOptionPane.showMessageDialog(this, "Player 1 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[0][1]!=0&&bMatrix[1][1]!=0&&bMatrix[2][1]!=0){
-				System.out.println("p1 win");
-				JOptionPane.showMessageDialog(this, "Player 1 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[0][2]!=0&&bMatrix[1][2]!=0&&bMatrix[2][2]!=0){
-				System.out.println("p1 win");
-				JOptionPane.showMessageDialog(this, "Player 1 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[0][0]!=0&&bMatrix[1][1]!=0&&bMatrix[2][2]!=0){
-				System.out.println("p1 win");
-				JOptionPane.showMessageDialog(this, "Player 1 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[0][2]!=0&&bMatrix[1][1]!=0&&bMatrix[2][0]!=0){
-				System.out.println("p1 win");
-				JOptionPane.showMessageDialog(this, "Player 1 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-		}
-		else{
-			if(bMatrix[0][0]!=0&&bMatrix[0][1]!=0&&bMatrix[0][2]!=0){
-				System.out.println("p2 win");
-				JOptionPane.showMessageDialog(this, "Player 2 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[1][0]!=0&&bMatrix[1][1]!=0&&bMatrix[1][2]!=0){
-				System.out.println("p2 win");
-				JOptionPane.showMessageDialog(this, "Player 2 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[2][0]!=0&&bMatrix[2][1]!=0&&bMatrix[2][2]!=0){
-				System.out.println("p2 win");
-				JOptionPane.showMessageDialog(this, "Player 2 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[0][0]!=0&&bMatrix[1][0]!=0&&bMatrix[2][0]!=0){
-				System.out.println("p2 win");
-				JOptionPane.showMessageDialog(this, "Player 2 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[0][1]!=0&&bMatrix[1][1]!=0&&bMatrix[2][1]!=0){
-				System.out.println("p2 win");
-				JOptionPane.showMessageDialog(this, "Player 2 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[0][2]!=0&&bMatrix[1][2]!=0&&bMatrix[2][2]!=0){
-				System.out.println("p2 win");
-				JOptionPane.showMessageDialog(this, "Player 2 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[0][0]!=0&&bMatrix[1][1]!=0&&bMatrix[2][2]!=0){
-				System.out.println("p2 win");
-				JOptionPane.showMessageDialog(this, "Player 2 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-			if(bMatrix[0][2]!=0&&bMatrix[1][1]!=0&&bMatrix[2][0]!=0){
-				System.out.println("p2 win");
-				JOptionPane.showMessageDialog(this, "Player 2 Wins!", "Over", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			}
-		}
-	}
-	void two(ActionEvent e){
-		JButton b=(JButton)e.getSource();
-		--chance;
-		if(chance>=0&&chance%2==0){
-			System.out.println(chance);
-			if(b==b0){
-				bMatrix[0][0]++;
-				b.setOpaque(true);
-				b.setBackground(Color.BLACK);
-				b.removeActionListener(this);
-				b.setEnabled(false);
-			}
-			if(b==b1){
-				bMatrix[0][1]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.setBackground(Color.BLACK);
-				b.removeActionListener(this);
-			}
-			if(b==b2){
-				bMatrix[0][2]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.BLACK);
-			}
-			if(b==b3){
-				bMatrix[1][0]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.BLACK);
-			}
-			if(b==b4){
-				bMatrix[1][1]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.BLACK);
-			}
-			if(b==b5){
-				bMatrix[1][2]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.BLACK);
-			}
-			if(b==b6){
-				bMatrix[2][0]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.BLACK);
-			}
-			if(b==b7){
-				bMatrix[2][1]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.BLACK);
-			}
-			if(b==b8){
-				bMatrix[2][2]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.BLACK);
-			}
-			check(1);
-		}
-		else if(chance>=0&&chance%2==1){
-			System.out.println(chance);
-			if(b==b0){
-				bMatrix[0][0]++;
-				b.setOpaque(true);
-				b.setBackground(Color.WHITE);
-				b.removeActionListener(this);
-				b.setEnabled(false);
-			}
-			if(b==b1){
-				bMatrix[0][1]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.setBackground(Color.WHITE);
-				b.removeActionListener(this);
-			}
-			if(b==b2){
-				bMatrix[0][2]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.WHITE);
-			}
-			if(b==b3){
-				bMatrix[1][0]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.WHITE);
-			}
-			if(b==b4){
-				bMatrix[1][1]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.WHITE);
-			}
-			if(b==b5){
-				bMatrix[1][2]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.WHITE);
-			}
-			if(b==b6){
-				bMatrix[2][0]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.WHITE);
-			}
-			if(b==b7){
-				bMatrix[2][1]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.WHITE);
-			}
-			if(b==b8){
-				bMatrix[2][2]++;
-				b.setOpaque(true);
-				b.setEnabled(false);
-				b.removeActionListener(this);
-				b.setBackground(Color.WHITE);
-			}
-			check(2);
-		}
+			System.out.println();
+		}*/
 	}
 	@Override
 	public void actionPerformed(ActionEvent e){
-		if(User.type){
-			two(e);
+		JButton btn=(JButton)e.getSource();
+		boolean b=false;
+		if(chance%2==1)
+			b=true;
+		if(b){
+			if(btn==b0){
+				bMatrix[0][0]=1;
+			}
+			if(btn==b1){
+				bMatrix[0][1]=1;
+			}
+			if(btn==b2){
+				bMatrix[0][2]=1;
+			}
+			if(btn==b3){
+				bMatrix[1][0]=1;
+			}
+			if(btn==b4){
+				bMatrix[1][1]=1;
+			}
+			if(btn==b5){
+				bMatrix[1][2]=1;
+			}
+			if(btn==b6){
+				bMatrix[2][0]=1;
+			}
+			if(btn==b7){
+				bMatrix[2][1]=1;
+			}
+			if(btn==b8){
+				bMatrix[2][2]=1;
+			}
+			btn.setIcon(cross);
+			btn.setEnabled(false);
 		}
+		else{
+			if(btn==b0){
+				bMatrix[0][0]=-1;
+			}
+			if(btn==b1){
+				bMatrix[0][1]=-1;
+			}
+			if(btn==b2){
+				bMatrix[0][2]=-1;
+			}
+			if(btn==b3){
+				bMatrix[1][0]=-1;
+			}
+			if(btn==b4){
+				bMatrix[1][1]=-1;
+			}
+			if(btn==b5){
+				bMatrix[1][2]=-1;
+			}
+			if(btn==b6){
+				bMatrix[2][0]=-1;
+			}
+			if(btn==b7){
+				bMatrix[2][1]=-1;
+			}
+			if(btn==b8){
+				bMatrix[2][2]=-1;
+			}
+			btn.setIcon(zero);
+			btn.setEnabled(false);
+		}
+		chance--;
+		result();
 	}
 	public static void main(String[] args){
 		new Board("").setVisible(true);
