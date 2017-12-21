@@ -53,11 +53,13 @@ public class Board extends JFrame implements ActionListener{
 		int m=JOptionPane.showConfirmDialog(this, "Up for Another Game?", "Hey!", JOptionPane.INFORMATION_MESSAGE, JOptionPane.YES_NO_OPTION);
 		//System.out.println(m);
 		dispose();
+		Instances.boardFrame=new Board("Tic-Tac-Toe");
+		Instances.scoreFrame=new ScoreBoard("Score");
 		if(m==0){
-			new Board("Tic-Tac-Toe").setVisible(true);
+			Instances.boardFrame.setVisible(true);
 		}
 		else{
-			new ScoreBoard("Score Board").setVisible(true);
+			Instances.scoreFrame.setVisible(true);
 		}
 	}
 	void pass(boolean b){
@@ -73,11 +75,13 @@ public class Board extends JFrame implements ActionListener{
 		int m=JOptionPane.showConfirmDialog(this, "Up for Another Game?", "Hey!", JOptionPane.YES_OPTION);
 		//System.out.println(m);
 		dispose();
+		Instances.boardFrame=new Board("Tic-Tac-Toe");
+		Instances.scoreFrame=new ScoreBoard("Score");
 		if(m==0){
-			new Board("Tic-Tac-Toe").setVisible(true);
+			Instances.boardFrame.setVisible(true);
 		}
 		else{
-			new ScoreBoard("Score Board").setVisible(true);
+			Instances.scoreFrame.setVisible(true);
 		}
 	}
 	int check(){
