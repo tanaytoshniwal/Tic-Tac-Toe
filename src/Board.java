@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -210,8 +209,5 @@ public class Board extends JFrame implements ActionListener{
 			chance--;
 			result();
 		}
-	}
-	public static void main(String[] args){
-		new Board("").setVisible(true);
 	}
 }
