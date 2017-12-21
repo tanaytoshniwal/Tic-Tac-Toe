@@ -104,11 +104,11 @@ public class First extends JFrame implements ActionListener{
 			User.name1=name.getText();
 			if(player1.isSelected()){
 				User.type=true;
-				User.name2=name2.getText();
+				User.name2="CPU";
 			}
 			else{
 				User.type=false;
-				User.name2="CPU";
+				User.name2=name2.getText();
 			}
 			dispose();
 			new Board("Tic-Tac-Toe").setVisible(true);
