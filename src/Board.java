@@ -12,8 +12,8 @@ public class Board extends JFrame implements ActionListener{
 	String result="";
 	int chance = 9;
 	int[][] bMatrix={{0,0,0},{0,0,0},{0,0,0}};
-	ImageIcon cross=new ImageIcon("c.png");
-	ImageIcon zero=new ImageIcon("o.png");
+	ImageIcon cross=new ImageIcon("./images/c.png");
+	ImageIcon zero=new ImageIcon("./images/o.png");
 	public Board(String str){
 		FrameProperty.set(this, str, 500, 500, false, new GridLayout(3,3), EXIT_ON_CLOSE);
 		setLocationRelativeTo(this);
@@ -50,7 +50,15 @@ public class Board extends JFrame implements ActionListener{
 	}
 	void tie(){
 		JOptionPane.showMessageDialog(this, "It's a tie!", "OOPS!", JOptionPane.INFORMATION_MESSAGE);
+		int m=JOptionPane.showConfirmDialog(this, "Up for Another Game?", "Hey!", JOptionPane.INFORMATION_MESSAGE, JOptionPane.YES_NO_OPTION);
+		//System.out.println(m);
 		dispose();
+		if(m==0){
+			new Board("Tic-Tac-Toe").setVisible(true);
+		}
+		else{
+			new ScoreBoard("Score Board").setVisible(true);
+		}
 	}
 	void pass(boolean b){
 		if(b){
