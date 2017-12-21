@@ -92,14 +92,16 @@ public class First extends JFrame implements ActionListener{
 		});
 	}
 	boolean check(){
-		if(name.getText().equals("")&&(!player1.isSelected()&&!player1.isSelected())){
-			return false;
-		}
-		return true;
+		boolean b=true;
+		if(player1.isSelected()&&name.getText().equals(""))
+			b=false;
+		if(player2.isSelected())
+			if(name.getText().equals("")||name2.getText().equals(""))
+				b=false;
+		return b;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e){
-		User.name1=name.getText();
 		if(check()){
 			User.name1=name.getText();
 			if(player1.isSelected()){
@@ -112,6 +114,8 @@ public class First extends JFrame implements ActionListener{
 			}
 			dispose();
 			new Board("Tic-Tac-Toe").setVisible(true);
+			if(User.type)
+				JOptionPane.showMessageDialog(this, "It's your turn first!", "Welcome!", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else
 			JOptionPane.showMessageDialog(this, "Input Error!", "ERROR", JOptionPane.ERROR_MESSAGE);
