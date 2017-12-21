@@ -70,7 +70,7 @@ public class Board extends JFrame implements ActionListener{
 			User.p2++;
 		}
 		JOptionPane.showMessageDialog(this, result, "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
-		int m=JOptionPane.showConfirmDialog(this, "Up for Another Game?", "Hey!", JOptionPane.INFORMATION_MESSAGE, JOptionPane.YES_NO_OPTION);
+		int m=JOptionPane.showConfirmDialog(this, "Up for Another Game?", "Hey!", JOptionPane.YES_OPTION);
 		//System.out.println(m);
 		dispose();
 		if(m==0){
@@ -217,5 +217,16 @@ public class Board extends JFrame implements ActionListener{
 			chance--;
 			result();
 		}
+		else{
+			JButton btn=(JButton)e.getSource();
+			if(chance%2==1){
+				btn.setIcon(zero);
+				btn.setEnabled(false);
+			}
+			chance-=2;
+		}
+	}
+	public static void main(String[] args){
+		new Board("").setVisible(true);
 	}
 }
