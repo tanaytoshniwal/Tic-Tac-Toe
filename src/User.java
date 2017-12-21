@@ -1,6 +1,6 @@
 
 public class User {
-	static boolean type=false;
+	static boolean type=true;
 	static String name1="";
 	static String name2="";
 	static int p1=0,p2=0;
