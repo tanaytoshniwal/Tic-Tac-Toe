@@ -113,7 +113,7 @@ public class First extends JFrame implements ActionListener{
 				User.name2=name2.getText();
 			}
 			dispose();
-			Instances.boardFrame.setVisible(true);
+			new Board("Tic-Tac-Toe").setVisible(true);
 			if(User.type)
 				JOptionPane.showMessageDialog(this, "It's your turn first!", "Welcome!", JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -122,7 +122,6 @@ public class First extends JFrame implements ActionListener{
 	}
 	public static void main(String[] args){
 		Instances.firstFrame=new First("Tic-Tac-Toe");
-		Instances.boardFrame=new Board("Tic-Tac-Toe");
 		Instances.firstFrame.setVisible(true);
 	}
 }
