@@ -3,7 +3,7 @@
 A simple Java GUI program of the very famous and traditional game Tic-Tac-Toe using Java AWT and Swings components
 ### Usage
 Compile all the java files.java" file in src folder using command:
-  ```bash
+  ```java
       $ javac -d bin *.java
   ```
 Now run the .class file using command:
